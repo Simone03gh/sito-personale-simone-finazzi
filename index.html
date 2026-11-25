@@ -1,42 +1,222 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simone Finazzi · Front-End Developer</title>
-<style>
-:root { --sfondo: #0f172a; --testo: #e2e8f0; --colore: #38bdf8; }
-* { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, sans-serif; background: var(--sfondo); color: var(--testo); line-height: 1.6; }
-main { max-width: 640px; margin: 0 auto; padding: 64px 24px; }
-h1 { font-size: 2.4rem; margin: 0 0 8px; }
-.ruolo { color: var(--colore); font-weight: 600; margin: 0 0 32px; }
-h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; margin: 48px 0 12px; }
-.progetto { border: 1px solid #334155; border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
-.progetto strong { display: block; }
-a { color: var(--colore); }
-footer { margin-top: 64px; color: #94a3b8; font-size: .9rem; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simone Finazzi · Front-End Developer</title>
+  <style>
+    /* COLORI: cambia questi valori per cambiare tutto il sito */
+    :root {
+      --sfondo: #0b1120;
+      --testo: #e2e8f0;
+      --colore: #38bdf8;
+      --colore2: #a78bfa;
+      --grigio: #94a3b8;
+      --card: #111a2e;
+      --bordo: #1e293b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--sfondo);
+      color: var(--testo);
+      line-height: 1.6;
+    }
+
+    a { color: var(--colore); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* MENU IN ALTO */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(11, 17, 32, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--bordo);
+      z-index: 10;
+    }
+    nav .contenitore {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo { font-weight: 700; color: var(--testo); }
+    nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
+    nav ul a { color: var(--grigio); font-size: .95rem; }
+    nav ul a:hover { color: var(--colore); text-decoration: none; }
+
+    /* PRESENTAZIONE */
+    .hero { padding: 96px 0 64px; }
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--colore), var(--colore2));
+      color: var(--sfondo);
+      font-size: 2rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .saluto { color: var(--colore); font-weight: 600; margin: 0; }
+    h1 { font-size: 3rem; line-height: 1.1; margin: 8px 0 12px; }
+    .gradiente {
+      background: linear-gradient(90deg, var(--colore), var(--colore2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .ruolo { font-size: 1.25rem; color: var(--grigio); margin: 0 0 24px; }
+    .bottoni { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .bottone {
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid var(--colore);
+    }
+    .bottone.pieno { background: var(--colore); color: var(--sfondo); }
+    .bottone:hover { text-decoration: none; opacity: .85; }
+
+    /* SEZIONI */
+    section { padding: 48px 0; border-top: 1px solid var(--bordo); }
+    h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--colore);
+      margin: 0 0 24px;
+    }
+
+    /* COMPETENZE */
+    .competenze { display: flex; flex-wrap: wrap; gap: 10px; }
+    .competenze span {
+      background: var(--card);
+      border: 1px solid var(--bordo);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: .95rem;
+    }
+
+    /* PROGETTI */
+    .griglia {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .progetto {
+      background: var(--card);
+      border: 1px solid var(--bordo);
+      border-radius: 16px;
+      padding: 22px;
+      transition: transform .2s, border-color .2s;
+    }
+    .progetto:hover { transform: translateY(-4px); border-color: var(--colore); }
+    .progetto h3 { margin: 0 0 8px; font-size: 1.1rem; }
+    .progetto p { margin: 0 0 16px; color: var(--grigio); font-size: .95rem; }
+
+    footer {
+      text-align: center;
+      color: var(--grigio);
+      font-size: .9rem;
+      padding: 40px 0;
+      border-top: 1px solid var(--bordo);
+    }
+
+    /* SCHERMI PICCOLI (telefono) */
+    @media (max-width: 560px) {
+      h1 { font-size: 2.2rem; }
+      .hero { padding: 64px 0 40px; }
+      nav ul { gap: 14px; }
+    }
+  </style>
 </head>
 <body>
-<main>
-<!-- 1. Cambia il nome, il ruolo e la presentazione -->
-<h1>Simone Finazzi</h1>
-<p class="ruolo">Front-End Developer in formazione</p>
-<p>Mi sto formando come sviluppatore web: HTML, CSS, Bootstrap e JavaScript. Mi piace risolvere problemi e vedere il codice funzionare. Questa è la mia prima pagina online.</p>
 
-<h2>Progetti</h2>
-<!-- 2. Sostituisci con i tuoi repository: copia e incolla il blocco per aggiungerne altri -->
-<div class="progetto">
-<strong>dispensa-git</strong>
-Il mio primo contributo su GitHub: fork, modifica e pull request.
-<br><a href="https://github.com/Simone03gh/dispensa-git">Vai al codice</a>
-</div>
+  <nav>
+    <div class="contenitore">
+      <span class="logo">SF</span>
+      <ul>
+        <li><a href="#competenze">Competenze</a></li>
+        <li><a href="#progetti">Progetti</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<h2>Contatti</h2>
-<!-- 3. Metti solo ciò che vuoi rendere pubblico -->
-<p><a href="https://github.com/Simone03gh">GitHub</a> · <a href="https://www.linkedin.com/">LinkedIn</a></p>
-<footer>Pubblicata con Git, GitHub e Vercel.</footer>
-</main>
+  <main>
+
+    <!-- 1. PRESENTAZIONE: cambia nome, ruolo e frase -->
+    <div class="hero">
+      <div class="avatar">SF</div>
+      <p class="saluto">Ciao, sono</p>
+      <h1><span class="gradiente">Simone Finazzi</span></h1>
+      <p class="ruolo">Front-End Developer in formazione · Milano</p>
+      <p>Sto imparando a costruire siti web con HTML, CSS, Bootstrap e JavaScript.
+         Mi piace risolvere problemi e vedere il codice prendere forma nel browser.
+         Questa è la mia prima pagina online.</p>
+      <div class="bottoni">
+        <a class="bottone pieno" href="#progetti">I miei progetti</a>
+        <a class="bottone" href="https://github.com/Simone03gh">GitHub</a>
+      </div>
+    </div>
+
+    <!-- 2. COMPETENZE: aggiungi o togli gli <span> -->
+    <section id="competenze">
+      <h2>Competenze</h2>
+      <div class="competenze">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>Bootstrap</span>
+        <span>JavaScript</span>
+        <span>Git</span>
+        <span>GitHub</span>
+        <span>Vercel</span>
+      </div>
+    </section>
+
+    <!-- 3. PROGETTI: copia e incolla un blocco <div class="progetto"> per aggiungerne altri -->
+    <section id="progetti">
+      <h2>Progetti</h2>
+      <div class="griglia">
+
+        <div class="progetto">
+          <h3>Sito personale</h3>
+          <p>Questa pagina: HTML e CSS, salvata su GitHub e pubblicata con Vercel.</p>
+          <a href="https://github.com/Simone03gh/sito-personale-simone-finazzi">Vai al codice →</a>
+        </div>
+
+        <div class="progetto">
+          <h3>dispensa-git</h3>
+          <p>Il mio primo contributo su GitHub: fork, modifica e pull request.</p>
+          <a href="https://github.com/Simone03gh/dispensa-git">Vai al codice →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. CONTATTI: metti solo ciò che vuoi rendere pubblico -->
+    <section id="contatti">
+      <h2>Contatti</h2>
+      <p>Vuoi vedere il mio codice o metterti in contatto?</p>
+      <div class="bottoni">
+        <a class="bottone pieno" href="https://github.com/Simone03gh">GitHub</a>
+        <a class="bottone" href="https://www.linkedin.com/">LinkedIn</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>Pubblicata con Git, GitHub e Vercel.</footer>
+
 </body>
 </html>
